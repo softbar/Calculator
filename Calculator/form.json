@@ -1,0 +1,298 @@
+{
+	"elements": [
+		{
+			"type": "ExpansionPanel",
+			"caption": "General module configuration",
+			"name": "ModuleConfig",
+			"items": [
+				{
+					"type": "CheckBox",
+					"name": "DeleteUnusedVars",
+					"caption": "Automatically delete unused variables"
+				},
+				{
+					"type": "CheckBox",
+					"name": "SaveDelete",
+					"caption": "Delete only if no References found"
+				},
+				{
+					"type": "CheckBox",
+					"name": "ShowActivity",
+					"caption": "Show real-time activity in the module configuration"
+				},
+				{
+					"type": "CheckBox",
+					"name": "CreateActivityVar",
+					"caption": "Create activity variable for use in the web front"
+				}
+			]
+		},
+		{
+			"type": "ExpansionPanel",
+			"caption": "Set Input / Output variables",
+			"items": [
+				{
+					"type": "List",
+					"name": "ValueItems",
+					"caption": "Set variables to collect values",
+					"add": true,
+					"delete": true,
+					"sort": {
+						"column": "ident",
+						"direction": "ascending"
+					},
+					"columns": [
+						{
+							"name": "id",
+							"caption": "ID",
+							"width": "70px",
+							"add": 0
+						},
+						{
+							"name": "variableID",
+							"caption": "Variable ID",
+							"width": "auto",
+							"add": 0,
+							"edit": {
+								"type": "SelectVariable"
+							}
+						},
+						{
+							"name": "ident",
+							"caption": "Identifier",
+							"width": "220px",
+							"add": "",
+							"edit": {
+								"type": "ValidationTextBox"
+							}
+						},
+						{
+							"name": "value",
+							"caption": "Value",
+							"width": "200px",
+							"add": 0
+						}
+					]
+				},
+								{
+					"type": "List",
+					"name": "OutputItems",
+					"caption": "Create variables for output or calculation",
+					"add": true,
+					"delete": true,
+					"sort": {
+						"column": "name",
+						"direction": "ascending"
+					},
+					"columns": [
+						{
+							"name": "ident",
+							"caption": "",
+							"width": "0px",
+							"add": "",
+							"visible": false,
+							"save": true
+						},
+						{
+							"name": "create",
+							"caption": "Create",
+							"width": "60px",
+							"add": true,
+							"edit": {
+								"type": "CheckBox"
+							}
+						},
+						{
+							"name": "name",
+							"caption": "Variable Name",
+							"width": "150px",
+							"add": "",
+							"edit": {
+								"type": "ValidationTextBox",
+								"validate":"\\w+"
+							}
+						},
+						{
+							"name": "interval",
+							"caption": "Interval",
+							"width": "120px",
+							"add": 15,
+							"edit": {
+								"type": "Select",
+								"options": [
+									{
+										"label": "Off",
+										"value": 0
+									},
+									{
+										"label": "On Changes",
+										"value": -1
+									},
+									{
+										"label": "2-minutes",
+										"value": 2
+									},
+									{
+										"label": "5-minutes",
+										"value": 5
+									},
+									{
+										"label": "15-minutes",
+										"value": 15
+									},
+									{
+										"label": "30-minutes",
+										"value": 30
+									},
+									{
+										"label": "1-hour",
+										"value": 60
+									},
+									{
+										"label": "2-hours",
+										"value": 120
+									},
+									{
+										"label": "6-hours",
+										"value": 360
+									},
+									{
+										"label": "12-hours",
+										"value": 720
+									},
+									{
+										"label": "24-hours",
+										"value": 1440
+									}
+								]
+							}
+						},
+						{
+							"name": "function",
+							"caption": "Function",
+							"width": "130px",
+							"add": 1,
+							"edit": {
+								"type": "Select",
+								"options": [
+									{
+										"label": "User Expression",
+										"value": 0
+									},
+									{
+										"label": "Sum",
+										"value": 1
+									},
+									{
+										"label": "Minimum",
+										"value": 2
+									},
+									{
+										"label": "Maximum",
+										"value": 3
+									},
+									{
+										"label": "Middle",
+										"value": 4
+									}
+								]
+							}
+						},
+						{
+							"name": "condition",
+							"caption": "User Expression",
+							"width": "auto",
+							"add": "*",
+							"edit": {
+								"type": "ValidationTextBox"
+							}
+						},
+						{
+							"name": "filter",
+							"caption": "Filter",
+							"width": "200px",
+							"add": "",
+							"edit": {
+								"type": "ValidationTextBox"
+							}
+						},
+						{
+							"name": "value",
+							"caption": "Result",
+							"width": "100px",
+							"add": ""
+						}
+					]
+				}
+				
+			]
+		}
+		
+	],
+	"actions": [
+		{
+			"type": "RowLayout",
+			"items": [
+				{
+					"type": "ValidationTextBox",
+					"caption": "User Expression",
+					"name": "CONDITION"
+				},
+				{
+					"type": "Button",
+					"caption": "Execute",
+					"name": "Execute",
+					"onClick": "echo CALC_Calc($id,$CONDITION);"
+				},
+				{
+					"type": "Button",
+					"caption": "Assign to",
+					"name": "Assign",
+					"onClick": "IPS_RequestAction($id,'ASSIGN_COND', $OUTPUT.'|'.$CONDITION);"
+				},
+				{
+					"name": "OUTPUT",
+					"caption": "Output Variables",
+					"type": "Select",
+					"value": "",
+					"options": [
+						{
+							"label": "Select Output Varibles",
+							"value": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "List",
+			"name": "ValuesActivity",
+			"sort": {
+				"column": "nextRun",
+				"direction": "ascending"
+			},
+			"columns": [
+				{
+					"name": "name",
+					"caption": "Output Variable",
+					"width": "250px"
+				},
+				{
+					"name": "lastRun",
+					"caption": "Last Run",
+					"width": "180px"
+				},
+				{
+					"name": "nextRun",
+					"caption": "Next Run",
+					"width": "180px"
+				},
+				{
+					"name": "result",
+					"caption": "Last Result",
+					"width": "auto"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,12 @@
+{  
+	"id": "{19650302-C002-0000-DE01-2020SUMB0000}",  
+	"author": "Xaver Bauer",
+	"name": "Calculator",
+	"url": "https://github.com/softbar/Calculator",
+	"compatibility": {
+		"version": "5.2"
+	},
+	"version": "1.0.0",  
+	"build": 100,
+	"date": 1584035166
+}

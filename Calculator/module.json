@@ -1,0 +1,11 @@
+{
+	"id": "{19650302-C002-0000-DE01-2020SUMB0MOD}",
+	"name": "Calculator",
+	"type": 3,
+	"vendor": "Xaver Bauer",
+	"aliases":["Variable Calculator"],
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+	"prefix": "CALC"
+}
